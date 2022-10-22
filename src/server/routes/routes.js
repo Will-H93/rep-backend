@@ -1,22 +1,15 @@
-const { ObjectId } = require('mongodb')
 const express = require('express')
-const { connectToDb, getDb } = require('./db')
-
-const app = express()
-app.use(express.json())
+const recordRoutes = express.Router();
+const { connectToServer, getDb } = require("../db/conn")
 
 let db
-
-connectToDb((err) => {
+connectToServer((err) => {
     if (!err) {
-        app.listen(3000, () => {
-            console.log('app listening on port 3000')
-        })
         db = getDb()
     }
 })
 
-app.get('/session', (req, res) => {
+recordRoutes.get('/session', (req, res) => {
     let sessions = []
 
     db.collection('session')
@@ -30,7 +23,7 @@ app.get('/session', (req, res) => {
         })
 })
 
-app.post('/session', (req, res) => {
+recordRoutes.post('/session', (req, res) => {
     const session = req.body
 
     db.collection('session')
@@ -39,11 +32,11 @@ app.post('/session', (req, res) => {
         res.status(201).json(result)
     })
     .catch(() => {
-        response.status(500).json({err: 'could not create new session'})
+        res.status(500).json({err: 'could not create new session'})
     })
 })
 
-app.get('/exercises', (req, res) => {
+recordRoutes.get('/exercises', (req, res) => {
     let exercises = []
 
     db.collection('exercises')
@@ -57,7 +50,7 @@ app.get('/exercises', (req, res) => {
         })
 })
 
-app.get('/exercises/arms', (req, res) => {
+recordRoutes.get('/exercises/arms', (req, res) => {
     let exercises = []
 
     db.collection('exercises')
@@ -70,3 +63,5 @@ app.get('/exercises/arms', (req, res) => {
             res.status(500).json({error: 'Could not fetch documents'})
         })
 })
+
+module.exports = recordRoutes;
