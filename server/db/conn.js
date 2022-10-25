@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb')
-const Db = 'mongodb+srv://repapproot:6xSrXGO5cCtOtK5F@cluster0.v6zsnxn.mongodb.net/?retryWrites=true&w=majority'
+const Db = process.env.ATLAS_URI
 
 let dbConnection
 
