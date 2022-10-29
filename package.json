@@ -6,6 +6,26 @@
     "express": "^4.18.2",
     "mongo": "^0.1.0",
     "mongodb": "^4.11.0",
+    "nodemon": "^2.0.20",
     "prettier": "^2.7.1"
-  }
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "rep-test",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Will-H93/rep-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Will-H93/rep-test/issues"
+  },
+  "homepage": "https://github.com/Will-H93/rep-test#readme",
+  "description": ""
 }

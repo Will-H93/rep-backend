@@ -50,11 +50,13 @@ recordRoutes.get('/exercises', (req, res) => {
         })
 })
 
-recordRoutes.get('/exercises/arms', (req, res) => {
+recordRoutes.get('/exercises/:type', (req, res) => {
     let exercises = []
+    let selectedType = req.params.type
+    let capitalisedType = selectedType[0].toUpperCase() + selectedType.slice(1);
 
     db.collection('exercises')
-        .find({ arms: { $exists: true } })
+        .find({ type: capitalisedType })
         .forEach(exercise => exercises.push(exercise))
         .then(() => {
             res.status(200).json(exercises)
